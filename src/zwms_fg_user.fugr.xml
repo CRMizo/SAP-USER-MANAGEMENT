@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>User Managemnt Group</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZWMS_FG_USERTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZWMS_FG_USER</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZWMS_FM_USER_CREATE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>User Create</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_USER_NAME</PARAMETER>
+       <TYP>ZWMS_USER_NAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PASSWORD</PARAMETER>
+       <TYP>XUNCODE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>FAILED_TO_GENERATE_SALT</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_USER_NAME</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PASSWORD</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FAILED_TO_GENERATE_SALT</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZWMS_FM_USER_MAIN</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>User Management</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ACTION</PARAMETER>
+       <TYP>ZWMS_USER_ACTION</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>DATA_IN</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZWMS_USER_DATA_IN</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>DATA_OUT</PARAMETER>
+       <TYP>ZWMS_USER_DATA_OUT</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ACTION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>User Management Action</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DATA_IN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Data Input</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DATA_OUT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Data Output</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZWMS_FM_USER_VALIDATE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>WMS User Validate</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PASSWORD</PARAMETER>
+       <TYP>XUNCODE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PASSWORD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>New password</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message type: S Success, E Error, W Warning, I Info, A Abort</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message Text</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
