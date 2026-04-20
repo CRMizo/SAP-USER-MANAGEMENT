@@ -9,6 +9,71 @@
    </INCLUDES>
    <FUNCTIONS>
     <item>
+     <FUNCNAME>ZWMS_FM_USER_CHANGE_PWD</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Change Password</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_OLD_PASSWORD</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>XUNCODE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_NEW_PASSWORD</PARAMETER>
+       <TYP>XUNCODE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_REQUEST_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_OLD_PASSWORD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>New password</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_NEW_PASSWORD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>New password</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_REQUEST_ID</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message type: S Success, E Error, W Warning, I Info, A Abort</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message Text</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>ZWMS_FM_USER_CREATE</FUNCNAME>
      <REMOTE_CALL>R</REMOTE_CALL>
      <SHORT_TEXT>User Create</SHORT_TEXT>
@@ -24,6 +89,15 @@
       <RSIMP>
        <PARAMETER>IV_PASSWORD</PARAMETER>
        <TYP>XUNCODE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_REQUEST_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_ADDICTIONAL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZWMS_S_USER_PROPERTIES</TYP>
       </RSIMP>
      </IMPORT>
      <EXPORT>
@@ -55,6 +129,14 @@
        <KIND>P</KIND>
       </RSFDO>
       <RSFDO>
+       <PARAMETER>IV_REQUEST_ID</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_ADDICTIONAL</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
        <PARAMETER>EV_TYPE</PARAMETER>
        <KIND>P</KIND>
       </RSFDO>
@@ -65,6 +147,87 @@
       <RSFDO>
        <PARAMETER>FAILED_TO_GENERATE_SALT</PARAMETER>
        <KIND>X</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZWMS_FM_USER_GET_INFO</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Read User Info</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_USER_NAME</PARAMETER>
+       <TYP>ZWMS_USER_NAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_GENDER</PARAMETER>
+       <TYP>CHAR1</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_EMAIL</PARAMETER>
+       <TYP>AD_SMTPADR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_PHONE</PARAMETER>
+       <TYP>AD_TLNMBR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_CREATION_DATE</PARAMETER>
+       <TYP>XUERDAT</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_USER_NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User Name</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_GENDER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sex</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_EMAIL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>E-Mail Address</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_PHONE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Telephone No.: Dialing Code and Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_CREATION_DATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Creation Date of the User Master Record</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <KIND>P</KIND>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -108,17 +271,23 @@
      </DOCUMENTATION>
     </item>
     <item>
-     <FUNCNAME>ZWMS_FM_USER_VALIDATE</FUNCNAME>
+     <FUNCNAME>ZWMS_FM_USER_UPDATE_INFO</FUNCNAME>
      <REMOTE_CALL>R</REMOTE_CALL>
-     <SHORT_TEXT>WMS User Validate</SHORT_TEXT>
+     <SHORT_TEXT>User update Info</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
        <PARAMETER>IV_USER_ID</PARAMETER>
        <TYP>ZWMS_USER_ID</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>IV_PASSWORD</PARAMETER>
-       <TYP>XUNCODE</TYP>
+       <PARAMETER>IV_USER_NAME</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZWMS_USER_NAME</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IS_ADDICTIONAL</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>ZWMS_S_USER_PROPERTIES</TYP>
       </RSIMP>
      </IMPORT>
      <EXPORT>
@@ -138,9 +307,69 @@
        <STEXT>WMS User ID</STEXT>
       </RSFDO>
       <RSFDO>
+       <PARAMETER>IV_USER_NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User Name</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IS_ADDICTIONAL</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message type: S Success, E Error, W Warning, I Info, A Abort</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message Text</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZWMS_FM_USER_VALIDATE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>WMS User Validate</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <TYP>ZWMS_USER_ID</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PASSWORD</PARAMETER>
+       <TYP>XUNCODE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_ADM</PARAMETER>
+       <TYP>ZWMS_USER_ADMINISTRATOR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_TYPE</PARAMETER>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MSG</PARAMETER>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_USER_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WMS User ID</STEXT>
+      </RSFDO>
+      <RSFDO>
        <PARAMETER>IV_PASSWORD</PARAMETER>
        <KIND>P</KIND>
        <STEXT>New password</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_ADM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Administrator</STEXT>
       </RSFDO>
       <RSFDO>
        <PARAMETER>EV_TYPE</PARAMETER>

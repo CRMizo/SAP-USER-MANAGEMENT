@@ -5,6 +5,8 @@ FUNCTION zwms_fm_user_create.
 *"     VALUE(IV_USER_ID) TYPE  ZWMS_USER_ID
 *"     VALUE(IV_USER_NAME) TYPE  ZWMS_USER_NAME
 *"     VALUE(IV_PASSWORD) TYPE  XUNCODE
+*"     VALUE(IV_REQUEST_ID) TYPE  ZWMS_USER_ID
+*"     VALUE(IS_ADDICTIONAL) TYPE  ZWMS_S_USER_PROPERTIES OPTIONAL
 *"  EXPORTING
 *"     VALUE(EV_TYPE) TYPE  BAPI_MTYPE
 *"     VALUE(EV_MSG) TYPE  BAPI_MSG
@@ -39,14 +41,11 @@ FUNCTION zwms_fm_user_create.
   DATA ls_bapipwd       TYPE bapipwd.
   ls_bapipwd-bapipwd = iv_password.
   CALL FUNCTION 'PASSWORD_FORMAL_CHECK'
-    EXPORTING
-      password        = ls_bapipwd
-      security_policy = 'ZPASSWORD_POLICY_01'
-    IMPORTING
-      msgtext         = lv_pwd_check_msg
-    EXCEPTIONS
-      internal_error  = 1
-      OTHERS          = 2.
+    EXPORTING  password        = ls_bapipwd
+               security_policy = 'ZPASSWORD_POLICY_01'
+    IMPORTING  msgtext         = lv_pwd_check_msg
+    EXCEPTIONS internal_error  = 1
+               OTHERS          = 2.
   IF sy-subrc <> 0.
     ev_type = 'E'.
     ev_msg = lv_pwd_check_msg.
@@ -79,11 +78,17 @@ FUNCTION zwms_fm_user_create.
 
   DATA ls_new_user TYPE zwms_t_user.
 
-  ls_new_user = VALUE #( user_id     = iv_user_id
-                         user_name   = iv_user_name
-                         pwd_initial = abap_true
-                         pwd_salt    = lv_salt
-                         pwd_hash    = lv_pwd_hash ).
+  ls_new_user = VALUE #( user_id       = iv_user_id
+                         user_name     = iv_user_name
+                         pwd_initial   = abap_true
+                         creation_date = sy-datum
+                         creation_user = iv_request_id
+                         pwd_salt      = lv_salt
+                         pwd_hash      = lv_pwd_hash
+                         email         = is_addictional-email
+                         gender        = is_addictional-gender
+                         phone         = is_addictional-phone
+                         administrator = is_addictional-administrator ).
 
   INSERT zwms_t_user FROM ls_new_user.
   IF sy-subrc = 0.

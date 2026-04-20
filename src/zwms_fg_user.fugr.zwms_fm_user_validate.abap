@@ -5,6 +5,7 @@ FUNCTION zwms_fm_user_validate.
 *"     VALUE(IV_USER_ID) TYPE  ZWMS_USER_ID
 *"     VALUE(IV_PASSWORD) TYPE  XUNCODE
 *"  EXPORTING
+*"     VALUE(EV_ADM) TYPE  ZWMS_USER_ADMINISTRATOR
 *"     VALUE(EV_TYPE) TYPE  BAPI_MTYPE
 *"     VALUE(EV_MSG) TYPE  BAPI_MSG
 *"----------------------------------------------------------------------
@@ -35,6 +36,7 @@ FUNCTION zwms_fm_user_validate.
     DATA(lv_subrc) = sy-subrc.
     CASE lv_subrc.
       WHEN 0. " ok
+        ev_adm  = abap_true.
         ev_type = 'S'.
         ev_msg = 'Verification successfully.'.
         RETURN.
@@ -46,9 +48,10 @@ FUNCTION zwms_fm_user_validate.
   ENDIF.
 
   " Get User info
+  data(lv_user_id) = to_upper( iv_user_id ).
   SELECT SINGLE *
      FROM zwms_t_user
-     WHERE user_id = @iv_user_id
+     WHERE user_id = @lv_user_id
      INTO @DATA(ls_user).
   IF sy-subrc <> 0.
     ev_type = 'E'.
@@ -81,6 +84,7 @@ FUNCTION zwms_fm_user_validate.
   ENDTRY.
 
   IF lv_pwd_hash = ls_user-pwd_hash.
+    ev_adm  = ls_user-administrator.
     ev_type = 'S'.
     ev_msg = 'Password verification successfully.'.
 
